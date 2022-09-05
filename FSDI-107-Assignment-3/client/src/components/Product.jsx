@@ -1,6 +1,6 @@
+import './Product.css'
 import { React, useState, useContext } from 'react'
 import QuantityPicker from './QuantityPicker'
-import './Product.css'
 import StoreContext from '../store/storeContext';
 
 const Product = (props) => { //This brings all of the properties input into the parent component
@@ -9,9 +9,11 @@ const Product = (props) => { //This brings all of the properties input into the 
 
     const handleAddClicked = () => {
         console.log(`Added ${quantity} ${props.data.title} to cart`);
-        // create a copy of propr.data 
-        // 
-        addToCart(props.data) // execute the variable above
+        //create a copy, mod copy, set the copy
+        //                                             👇 this quantity gets created then pushed into object
+        let propCopy = { ...props.data, quantity: quantity }; //Add products to cart using the Spread Operator (Gathering data from previous save)
+        // console.log(propCopy)
+        addToCart(propCopy) // execute the variable above. 
     }
 
     const onQuantityChange = (quantity) => {

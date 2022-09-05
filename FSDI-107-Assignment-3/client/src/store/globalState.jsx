@@ -7,10 +7,22 @@ const GlobalState = (props) => {
 
     const addToCart = (prod) => {
         console.log('Added to cart');
-
-        //create a copy, mod copy, set the copy
         let placeHolder = [...cart]; //Add products to cart using the Spread Operator (Gathering data from previous save)
-        placeHolder.push(prod); //
+        //create a copy, mod copy, set the copy
+        let exists = false;
+        for (let i = 0; i < cart.length; i++) {
+            let item = cart[i];
+
+            if (item._id === prod._id) { // If we already have a product with the same id, then just increase the quantity variable. 
+                exists = true;
+                item.quantity += prod.quantity;
+            }
+        }
+
+        if (!exists) { // If the for loop above didnt find the item with the same id, push the new item
+            placeHolder.push(prod); //
+        }
+
         setCart(placeHolder);
     };
     const removeFromCart = () => { };

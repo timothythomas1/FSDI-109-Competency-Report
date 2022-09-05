@@ -6,14 +6,32 @@ import StoreContext from '../store/storeContext'
 // A component is a fucntion that ALWAYS returns a JSX. 
 
 const NavBar = () => {
-    let cart = useContext(StoreContext).cart; // Getting the cart from context and storing it in a variable
+    const cart = useContext(StoreContext).cart; // Getting the cart from context and storing it in a variable
+
+    let getNumItems = () => {
+        let sum = 0;
+        // count the number pf products in cart
+        for (let i = 0; i < cart.length; i++) {
+            let prod = cart[i];
+            sum += prod.quantity;
+        }
+        console.log(sum);
+        return sum;
+    }
+
     return (
         <div className="nav-bar">
 
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
-                    <Link className="navbar-brand" to="/">Navbar</Link>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <Link className="navbar-brand" to="/"><i className="fa-solid fa-house-tsunami"></i>    Swell</Link>
+                    <button className="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav"
+                        aria-controls="navbarNav"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
@@ -41,7 +59,7 @@ const NavBar = () => {
                             <form className="d-flex">
                                 {/* <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" /> */}
                                 <Link className="btn btn-outline-success" to="/cart">
-                                    {cart.length} &nbsp; View Cart</Link>
+                                    {getNumItems()} &nbsp; View Cart</Link>
                             </form>
                         </div>
 
@@ -49,9 +67,9 @@ const NavBar = () => {
                 </div>
             </nav>
 
-            <h2><i className="fa-solid fa-store"></i>My Super Store</h2>
+            <h2>Welcome to Swell</h2>
 
-        </div>
+        </div >
     )
 }
 // In order to work with this component, we need to export the component, so other components can import them and use them.
